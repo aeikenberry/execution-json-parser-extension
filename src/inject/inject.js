@@ -13,6 +13,31 @@ chrome.extension.sendMessage({}, function (response) {
 })
 
 function doNice () {
+  fancyRows()
+  fancyTabPanels()
+}
+
+function fancyTabPanels () {
+  $('.tabpanel').each(function (i, e) {
+    let json
+    let pre = $(this).find('pre')
+    let preHmtl = $(pre).html()
+    if (!preHmtl) return
+
+    try {
+      json = JSON.parse(preHmtl)
+    } catch (e) {
+      return
+    }
+
+    $(pre).jsonViewer(json, {
+      collapsed: false,
+      withoutQuotes: true
+    })
+  })
+}
+
+function fancyRows () {
   $('tr.tbl-expand-row').each(function (i, e) {
     let json
     let pre = $(this).find('pre')
