@@ -9,13 +9,8 @@
   },
   "default_locale": "en",
   "permissions": [
-    "https://console.aws.amazon.com/states/*",
-    "declarativeContent"
+    "https://console.aws.amazon.com/states/*"
   ],
-  "background": {
-    "scripts": ["src/background.js"],
-    "persistent": false
-  },
   "page_action": {
     "default_icon" : "icons/icon19.png",
     "default_title" : "Parsing your json"

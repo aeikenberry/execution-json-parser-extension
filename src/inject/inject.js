@@ -1,20 +1,26 @@
-chrome.extension.sendMessage({}, function (response) {
-  var readyStateCheckInterval = setInterval(function () {
-    if (document.readyState === 'complete') {
-      clearInterval(readyStateCheckInterval)
+// chrome.extension.sendMessage({}, function (response) {
+//   var readyStateCheckInterval = setInterval(function () {
+//     if (document.readyState === 'complete') {
+//       clearInterval(readyStateCheckInterval)
 
-      console.log('Loading AWSNice')
+//       console.log('Loading AWSNice')
 
-      setInterval(function () {
-        doNice()
-      }, 2000)
-    }
-  }, 10)
-})
+//       setInterval(function () {
+//         doNice()
+//       }, 2000)
+//     }
+//   }, 10)
+// })
+
+console.log('Loading JSON Parser')
+
+setInterval(function () {
+  doNice()
+}, 2000)
 
 function doNice () {
   fancyRows()
-  fancyTabPanels()
+  // fancyTabPanels()
 }
 
 function fancyTabPanels () {
@@ -38,9 +44,9 @@ function fancyTabPanels () {
 }
 
 function fancyRows () {
-  $('tr.tbl-expand-row').each(function (i, e) {
+  $('pre').each(function (i, e) {
     let json
-    let pre = $(this).find('pre')
+    let pre = $(this)
     let preHmtl = $(pre).html()
     if (!preHmtl) return
 
@@ -49,12 +55,6 @@ function fancyRows () {
     } catch (e) {
       return
     }
-    let subtitle = json.name || json.resource
-    if (subtitle) {
-      let parent = $(pre).parents('td')
-      parent.append('<span style="font-weight:bold">' + subtitle + '</span>')
-    }
-
     $(pre).jsonViewer(json, {
       collapsed: false,
       withoutQuotes: true
